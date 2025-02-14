@@ -1,0 +1,29 @@
+{
+    "name": "hellowp/hw-steam-fetch-games",
+    "description": "Fetch data via steam api and create a list of steam games",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HelloWP\\HWSteamMain\\App\\": "app/",
+            "HelloWP\\HWSteamMain\\App\\Admin\\": "app/admin",
+            "HelloWP\\HWSteamMain\\App\\Helper\\": "app/helper",
+            "HelloWP\\HWSteamMain\\App\\Services\\": "app/services"
+        }
+    },
+    "authors": [
+        {
+            "name": "Soczó Kristóf",
+            "email": "lonsdale201@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "composer/installers": false,
+            "automattic/jetpack-autoloader": false
+        }
+    }
+}
