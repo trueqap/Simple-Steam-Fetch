@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Simple Steam Fetch
  * Description: Fetch and import game data from the Steam API. Automatically create custom posts with detailed descriptions, screenshots, and pricing information. Compatible with JetEngine.
- * Version: 0.1
+ * Version: 0.2
  * Author: Soczó Kristóf
  * Author URI: https://github.com/Lonsdale201?tab=repositories
  * Plugin URI: https://github.com/Lonsdale201/Simple-Steam-Fetch
@@ -22,6 +22,8 @@ define('HW_Steam_Main', true);
 define('HW_STEAM_MAIN_PATH', plugin_dir_path(__FILE__)); 
 define('HW_STEAM_MAIN_URL', plugin_dir_url(__FILE__));  
 define('HW_STEAM_MAIN_ASSETS', HW_STEAM_MAIN_URL . 'app/admin/assets/'); 
+define('HW_STEAM_FRONTEND_TEMPLATES', HW_STEAM_MAIN_PATH . 'app/frontend/templates/');
+define('HW_STEAM_FRONTEND_ASSETS', HW_STEAM_MAIN_URL . 'app/frontend/assets/');
 
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -108,6 +110,9 @@ final class HW_Steam_Main {
             \HelloWP\HWSteamMain\App\Helper\AjaxHandler::init();
             \HelloWP\HWSteamMain\App\Helper\PostMediaCleaner::init();
         }
+
+        \HelloWP\HWSteamMain\App\Frontend\Shortcode\SteamNewsShortcode::register();
+        \HelloWP\HWSteamMain\App\Services\GameNews::init();
 
         $myUpdateChecker = PucFactory::buildUpdateChecker(
             'https://plugin-uodater.alex.hellodevs.dev/plugins/hw-steam-fetch-games.json',

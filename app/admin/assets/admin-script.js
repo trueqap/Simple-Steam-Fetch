@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
     $('.select2-field').select2({
-        placeholder: 'Please select an option',
+        placeholder: 'Write something',
         allowClear: true
     });
 

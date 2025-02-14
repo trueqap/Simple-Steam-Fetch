@@ -10,7 +10,9 @@
             "HelloWP\\HWSteamMain\\App\\": "app/",
             "HelloWP\\HWSteamMain\\App\\Admin\\": "app/admin",
             "HelloWP\\HWSteamMain\\App\\Helper\\": "app/helper",
-            "HelloWP\\HWSteamMain\\App\\Services\\": "app/services"
+            "HelloWP\\HWSteamMain\\App\\Services\\": "app/services",
+            "HelloWP\\HWSteamMain\\App\\Frontend\\": "app/frontend",
+            "HelloWP\\HWSteamMain\\App\\Frontend\\Shortcode\\": "app/frontend/shortcode"
         }
     },
     "authors": [

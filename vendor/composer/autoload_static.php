@@ -11,6 +11,8 @@ class ComposerStaticInit2f4b4cedd2a5eab153b7d11875504e69
         array (
             'HelloWP\\HWSteamMain\\App\\Services\\' => 33,
             'HelloWP\\HWSteamMain\\App\\Helper\\' => 31,
+            'HelloWP\\HWSteamMain\\App\\Frontend\\Shortcode\\' => 43,
+            'HelloWP\\HWSteamMain\\App\\Frontend\\' => 33,
             'HelloWP\\HWSteamMain\\App\\Admin\\' => 30,
             'HelloWP\\HWSteamMain\\App\\' => 24,
         ),
@@ -24,6 +26,14 @@ class ComposerStaticInit2f4b4cedd2a5eab153b7d11875504e69
         'HelloWP\\HWSteamMain\\App\\Helper\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/helper',
+        ),
+        'HelloWP\\HWSteamMain\\App\\Frontend\\Shortcode\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/frontend/shortcode',
+        ),
+        'HelloWP\\HWSteamMain\\App\\Frontend\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/frontend',
         ),
         'HelloWP\\HWSteamMain\\App\\Admin\\' => 
         array (

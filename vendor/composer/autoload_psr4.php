@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'HelloWP\\HWSteamMain\\App\\Services\\' => array($baseDir . '/app/services'),
     'HelloWP\\HWSteamMain\\App\\Helper\\' => array($baseDir . '/app/helper'),
+    'HelloWP\\HWSteamMain\\App\\Frontend\\Shortcode\\' => array($baseDir . '/app/frontend/shortcode'),
+    'HelloWP\\HWSteamMain\\App\\Frontend\\' => array($baseDir . '/app/frontend'),
     'HelloWP\\HWSteamMain\\App\\Admin\\' => array($baseDir . '/app/admin'),
     'HelloWP\\HWSteamMain\\App\\' => array($baseDir . '/app'),
 );

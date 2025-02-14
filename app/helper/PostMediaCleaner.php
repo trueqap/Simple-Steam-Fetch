@@ -2,6 +2,7 @@
 namespace HelloWP\HWSteamMain\App\Helper;
 
 use HelloWP\HWSteamMain\App\Helper\SettingsConfig;
+use HelloWP\HWSteamMain\App\Helper\GeneralSettingsConfig;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -14,19 +15,19 @@ class PostMediaCleaner {
     }
 
     /**
-     * Ellenőrzi és törli az adott poszthoz tartozó importált képeket a médiatárból.
+     * Delete attached images from the media library when the post is deleted,
+     * if the general setting is enabled.
      *
      * @param int $post_id
      */
     public static function clean_media_on_post_delete($post_id) {
-        // Ellenőrizzük, hogy a beállítás engedélyezve van-e
-        $delete_imported_images = (int) get_option('hw_delete_imported_images', 0);
-        if (!$delete_imported_images) {
+        // Instead of a direct get_option, we call our GeneralSettingsConfig:
+        if (! GeneralSettingsConfig::delete_imported_images()) {
             return;
         }
 
-        $selected_cpt = SettingsConfig::get_selected_cpt();
-        $post = get_post($post_id);
+        $selected_cpt = SettingsConfig::get_selected_cpt();  // ez maradhat, hiszen ez a fetch CFG-ből jön
+        $post         = get_post($post_id);
 
         if (!$post || $post->post_type !== $selected_cpt) {
             return;
@@ -44,14 +45,15 @@ class PostMediaCleaner {
     }
 
     /**
-     * Visszaadja az adott poszthoz kapcsolódó képek ID-jait, amelyek a Fetch rendszerből származnak.
+     * Visszaadja az adott poszthoz kapcsolódó képek ID-jait, amelyek a Fetch rendszerből származhatnak.
      *
      * @param int $post_id
      * @return array
      */
-    private static function get_attached_images($post_id) {
-        global $wpdb;
-    
+    private static function get_attached_images($post_id): array
+    {
+        // Eltávolítottad a global $wpdb; ha nem szükséges, ne tartsd ott
+
         $meta_keys = [
             SettingsConfig::get_capsule_meta(),
             SettingsConfig::get_gallery_meta(),
@@ -74,12 +76,15 @@ class PostMediaCleaner {
             $meta_value = get_post_meta($post_id, $meta_key, true);
     
             if (is_array($meta_value)) {
-                // **Galéria vagy Capsule Image esetén**
-                foreach ($meta_value as $key => $value) {
-                    if (isset($value['id'])) {
-                        $attachment_ids[] = (int) $value['id'];
-                    } elseif (is_array($value)) {
-                        foreach ($value as $sub_value) {
+                // Galéria vagy capsule image
+                foreach ($meta_value as $maybe_key => $maybe_value) {
+                    // Ha pl. ['id' => 123, 'url' => '...']
+                    if (isset($maybe_value['id'])) {
+                        $attachment_ids[] = (int) $maybe_value['id'];
+                    }
+                    // Ha esetleg többszintes tömb
+                    elseif (is_array($maybe_value)) {
+                        foreach ($maybe_value as $sub_value) {
                             if (isset($sub_value['id'])) {
                                 $attachment_ids[] = (int) $sub_value['id'];
                             }
@@ -87,12 +92,11 @@ class PostMediaCleaner {
                     }
                 }
             } elseif (is_numeric($meta_value)) {
+                // Ha esetleg közvetlen ID került ide
                 $attachment_ids[] = (int) $meta_value;
             }
         }
     
         return array_unique($attachment_ids);
     }
-    
-    
 }
