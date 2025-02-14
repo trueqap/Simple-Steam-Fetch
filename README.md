@@ -6,6 +6,12 @@ Stable tag: 2.3
 
 # Simple Steam Fetch Plugin
 
+> [!IMPORTANT]
+> Minimum PHP version: 8.0
+>
+> > [!IMPORTANT]
+> Minimum WordPress version: 6.0
+
 This plugin uses **two APIs** for its functionality:  
 
 1. **Steam Store API (Unofficial)**  
