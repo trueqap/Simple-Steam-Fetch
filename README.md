@@ -8,8 +8,8 @@ Stable tag: 2.3
 
 > [!IMPORTANT]
 > Minimum PHP version: 8.0
->
-> > [!IMPORTANT]
+
+> [!IMPORTANT]
 > Minimum WordPress version: 6.0
 
 This plugin uses **two APIs** for its functionality:  
