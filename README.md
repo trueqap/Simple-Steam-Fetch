@@ -12,6 +12,14 @@ Stable tag: 0.1
 > [!IMPORTANT]
 > Minimum WordPress version: 6.0
 
+## INSTRUCTIONS
+
+**How to download?**
+
+In the right section the green button: **<>Code** click, and in the dropdown menu, select the **Download ZIP** option. The downloaded file just upload it, you can easily install the downloaded file as an plugin within wordpress.
+
+## Description
+
 This plugin uses **two APIs** for its functionality:  
 
 1. **Steam Store API (Unofficial)**  
