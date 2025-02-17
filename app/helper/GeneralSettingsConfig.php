@@ -1,9 +1,18 @@
 <?php
+/**
+ * General Settings Configuration functionality.
+ *
+ * Manages general plugin settings that are not specifically related to the fetch process.
+ * All settings are stored in a single option array: 'hw_steam_general_cfg'.
+ *
+ * @package HW_Steam_Fetch
+ * @since 1.0.0
+ */
 
 namespace HelloWP\HWSteamMain\App\Helper;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
@@ -11,51 +20,51 @@ if (!defined('ABSPATH')) {
  *
  * Manages general plugin settings (not specifically related to the fetch process),
  * all stored in a single option array: 'hw_steam_general_cfg'.
+ *
+ * @package HelloWP\HWSteamMain\App\Helper
  */
-class GeneralSettingsConfig
-{
-    /**
-     * Holds all plugin general settings once loaded from the database.
-     *
-     * @var array|null
-     */
-    private static ?array $options = null;
+class GeneralSettingsConfig {
 
-    /**
-     * Loads the hw_steam_general_cfg option into self::$options if not already loaded.
-     *
-     * @return void
-     */
-    private static function load_options(): void
-    {
-        if (is_null(self::$options)) {
-            self::$options = get_option('hw_steam_general_cfg', []);
-        }
-    }
+	/**
+	 * Holds all plugin general settings once loaded from the database.
+	 *
+	 * @since 1.0.0
+	 * @var array|null
+	 */
+	private static $options = null;
 
-    /**
-     * Retrieves a specific setting key from the loaded options.
-     *
-     * @param string $key
-     * @param mixed  $default
-     * @return mixed
-     */
-    private static function getOption(string $key, $default = null)
-    {
-        self::load_options();
-        return self::$options[$key] ?? $default;
-    }
+	/**
+	 * Loads the hw_steam_general_cfg option into self::$options if not already loaded.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	private static function load_options() {
+		if ( null === self::$options ) {
+			self::$options = get_option( 'hw_steam_general_cfg', array() );
+		}
+	}
 
-    /**
-     * Whether to delete imported images automatically when a post is deleted.
-     *
-     * @return bool True if deletion is enabled, false otherwise.
-     */
-    public static function delete_imported_images(): bool
-    {
+	/**
+	 * Retrieves a specific setting key from the loaded options.
+	 *
+	 * @since 1.0.0
+	 * @param string $key     The option key to retrieve.
+	 * @param mixed  $default The default value if the key doesn't exist.
+	 * @return mixed The option value or default if not found.
+	 */
+	private static function get_option( $key, $default = null ) {
+		self::load_options();
+		return isset( self::$options[ $key ] ) ? self::$options[ $key ] : $default;
+	}
 
-        return (bool) self::getOption('delete_imported_images', false);
-    }
-
-  
+	/**
+	 * Whether to delete imported images automatically when a post is deleted.
+	 *
+	 * @since 1.0.0
+	 * @return bool True if deletion is enabled, false otherwise.
+	 */
+	public static function delete_imported_images() {
+		return (bool) self::get_option( 'delete_imported_images', false );
+	}
 }

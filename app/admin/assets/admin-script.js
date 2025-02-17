@@ -4,6 +4,25 @@ jQuery(document).ready(function ($) {
         allowClear: true
     });
 
+    function process_steam_results(data) {
+        if (!data.success) {
+            alert(data.data.message);
+            return { results: [] };
+        }
+    
+        const used_app_ids = new Set();
+        const unique_results = [];
+    
+        data.data.forEach(function(item) {
+            if (!used_app_ids.has(item.id)) {
+                used_app_ids.add(item.id);
+                unique_results.push(item);
+            }
+        });
+    
+        return { results: unique_results };
+    }
+
     $('#steam-game-search').select2({
         placeholder: 'Search for a Steam game',
         minimumInputLength: 3,
@@ -19,24 +38,7 @@ jQuery(document).ready(function ($) {
                     query: params.term
                 };
             },
-            processResults: function (data) {
-                if (!data.success) {
-                    alert(data.data.message);
-                    return { results: [] };
-                }
-            
-                const usedAppIds    = new Set();
-                const uniqueResults = [];
-            
-                data.data.forEach(item => {
-                    if (!usedAppIds.has(item.id)) {
-                        usedAppIds.add(item.id);
-                        uniqueResults.push(item);
-                    }
-                });
-            
-                return { results: uniqueResults };
-            },
+            processResults: process_steam_results,
             cache: false
         }
     });
